@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const dirname = __dirname.replace('build','')
 module.exports = {
-    entry: dirname+'/src/app.js',
+    entry: dirname+'/src/index.js',
     output: {
         filename: '[name].[hash].js',
         path: path.resolve(dirname,'dist'),
@@ -18,7 +18,24 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: ['style-loader','css-loader'],
-            }
+            },
+            {
+                test: /\.jsx?$/,
+                exclude:/node_modules/,
+                use:{
+                    loader:'babel-loader',
+                    options: {
+                        babelrc: false,
+                        presets: [
+                            require.resolve('@babel/preset-react'),
+                            [require.resolve('@babel/preset-env'), 
+                                {modules: false}]
+                        ],
+                        cacheDirectory: true
+                    }
+                },
+                
+            },
         ],
     },
     devtool: 'inline-source-map',

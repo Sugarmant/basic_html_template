@@ -1,2 +1,10 @@
-import './cssreset.css'
-console.log('test 1.0.0')
+
+import React from 'react'
+
+export default function App(){
+    return (
+        <>
+            this is test content
+        </>
+    );
+};
